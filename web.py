@@ -9,12 +9,12 @@ app = Flask(__name__)
 FlaskJSON(app)
 
 
-@app.route('/<url>/<cookie>', methods=['GET, POST'])
-def getInfo(url, cookie):
-    # url = 'https://www.bu.edu/link/bin/uiscgi_studentlink.pl/1675459615?ModuleName=current_balance_meal_and_pt.pl'
-    # cookie = "f5_cspm=1234; f5avraaaaaaaaaaaaaaaa_session_=HNJFMCMCABAGNNLAIAJKCMOJHCFNCHBJGFGIOPGFLFJNBNPFPJBGGPNIOGFELDJEIJEDEEFEHADHMHLMGMJAANFHHIGEMOJHLJAJIGOEMIBNFAPHPMIGMFOLLEAGIKNM; uiscgi_prod=e8510be2c65c31c1ed824b65ddbf0345:prod; BIGipServerist-uiscgi-app-prod-443-pool=1254475136.47873.0000; BIGipServerwww-prod-crc-443-pool=659366669.47873.0000"
-    with open('log.txt', 'w') as f:
-        f.write(url + "/n" + cookie)
+@app.route('/get_balance', methods=['GET', 'POST'])
+def getInfo():
+    url = 'https://www.bu.edu/link/bin/uiscgi_studentlink.pl/1675459615?ModuleName=current_balance_meal_and_pt.pl'
+    cookie = "f5_cspm=1234; f5avraaaaaaaaaaaaaaaa_session_=AMKFJCMAABAGNNLAAGEDCMOJHCFNCHBJGFGIOPGFLFJNBNPFPJBGGPNIOGFELDJEIJEDEEFEGMDHPLLMGMJAANFHDLGEINJHLJAJIGOEMIBNFADGPMIGMFOLLEAGIKDC; BIGipServerist-uiscgi-content-prod-443-pool=2315708170.47873.0000; uiscgi_prod=6969c54808a90dff5e353c9e37054afe:prod; BIGipServerist-uiscgi-app-prod-443-pool=1288029568.47873.0000"
+    # with open('log.txt', 'w') as f:
+    #     f.write(url + "/n" + cookie)
     mylist = urlFetch(url, cookie)
     return json_response(plan=mylist[2], meal=mylist[3], g_meal=mylist[4], din_points=mylist[5], con_points=mylist[6])
 
