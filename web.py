@@ -19,10 +19,15 @@ def getBalance(cookie):
     try:
         mylist = fetchBalance(url, cookie)
         msg = ""
+        plan = mylist[2]
+        meal = mylist[3]
+        g_meal = mylist[4]
+        din_points = mylist[5]
+        con_points = mylist[6]
     except:
         msg = "Error!"
         return json_response(msg=msg)
-    return json_response(msg=msg, plan=mylist[2], meal=mylist[3], g_meal=mylist[4], din_points=mylist[5], con_points=mylist[6])
+    return json_response(msg=msg, plan=plan, meal=meal, g_meal=g_meal, din_points=din_points, con_points=con_points)
 
 
 @app.route('/seat/<course>/<semester>', methods=['GET', 'POST'])
