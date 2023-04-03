@@ -36,11 +36,12 @@ def getSeat(course, semester):
         "[slash]", "/").replace("[backslash]", "\\").replace("[question]", "?")
     try:
         result = fetchSeat(course, semester)
+        seat = int(result[1])
         msg = ""
     except:
         msg = "Error!"
         return json_response(msg=msg)
-    return json_response(msg=msg, seat=result[1])
+    return json_response(msg=msg, seat=seat)
 
 
 @app.route('/input/<input>', methods=['GET', 'POST'])
