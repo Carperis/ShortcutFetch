@@ -3,7 +3,8 @@
 from datetime import datetime
 from flask import Flask, request
 from flask_json import FlaskJSON, JsonError, json_response, as_json
-from fetch import urlFetch
+from fetchBalance import fetchBalance
+from fetchSeat import fetchSeat
 
 app = Flask(__name__)
 FlaskJSON(app)
@@ -15,16 +16,32 @@ def getBalance(cookie):
     # cookie = "f5_cspm=1234; f5avraaaaaaaaaaaaaaaa_session_=AMKFJCMAABAGNNLAAGEDCMOJHCFNCHBJGFGIOPGFLFJNBNPFPJBGGPNIOGFELDJEIJEDEEFEGMDHPLLMGMJAANFHDLGEINJHLJAJIGOEMIBNFADGPMIGMFOLLEAGIKDC; BIGipServerist-uiscgi-content-prod-443-pool=2315708170.47873.0000; uiscgi_prod=6969c54808a90dff5e353c9e37054afe:prod; BIGipServerist-uiscgi-app-prod-443-pool=1288029568.47873.0000"
     cookie = cookie.replace("[space]", " ").replace("[dot]", ".").replace(
         "[slash]", "/").replace("[backslash]", "\\").replace("[question]", "?")
-    mylist = urlFetch(url, cookie)
-    return json_response(plan=mylist[2], meal=mylist[3], g_meal=mylist[4], din_points=mylist[5], con_points=mylist[6])
+    try:
+        mylist = fetchBalance(url, cookie)
+        msg = ""
+    except:
+        msg = "Error!"
+        return json_response(msg=msg)
+    return json_response(msg=msg, plan=mylist[2], meal=mylist[3], g_meal=mylist[4], din_points=mylist[5], con_points=mylist[6])
+
+
+@app.route('/seat/<course>/<semester>', methods=['GET', 'POST'])
+def getSeat(course, semester):
+    course = course.replace("[space]", " ").replace("[dot]", ".").replace(
+        "[slash]", "/").replace("[backslash]", "\\").replace("[question]", "?")
+    try:
+        result = fetchSeat(course, semester)
+        msg = ""
+    except:
+        msg = "Error!"
+        return json_response(msg=msg)
+    return json_response(msg=msg, seat=result[1])
 
 
 @app.route('/input/<input>', methods=['GET', 'POST'])
-def testInput(input):
-    # print(input)
+def getInput(input):
     input = input.replace("[space]", " ").replace("[dot]", ".").replace(
         "[slash]", "/").replace("[backslash]", "\\").replace("[question]", "?")
-    # print(input)
     return json_response(input=input)
 
 

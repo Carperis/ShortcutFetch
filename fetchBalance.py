@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def urlFetch(url, cookie):
+def fetchBalance(url, cookie):
     # Define the URL of the website you want to fetch
     # url = 'https://www.bu.edu/link/bin/uiscgi_studentlink.pl/1675459615?ModuleName=current_balance_meal_and_pt.pl'
 
@@ -32,5 +32,5 @@ if __name__ == '__main__':
     url = 'https://www.bu.edu/link/bin/uiscgi_studentlink.pl/1675459615?ModuleName=current_balance_meal_and_pt.pl'
     # cookie = "f5_cspm=1234; f5avraaaaaaaaaaaaaaaa_session_=HNJFMCMCABAGNNLAIAJKCMOJHCFNCHBJGFGIOPGFLFJNBNPFPJBGGPNIOGFELDJEIJEDEEFEHADHMHLMGMJAANFHHIGEMOJHLJAJIGOEMIBNFAPHPMIGMFOLLEAGIKNM; uiscgi_prod=e8510be2c65c31c1ed824b65ddbf0345:prod; BIGipServerist-uiscgi-app-prod-443-pool=1254475136.47873.0000; BIGipServerwww-prod-crc-443-pool=659366669.47873.0000"
     cookie = "f5_cspm=1234; f5avraaaaaaaaaaaaaaaa_session_=AMKFJCMAABAGNNLAAGEDCMOJHCFNCHBJGFGIOPGFLFJNBNPFPJBGGPNIOGFELDJEIJEDEEFEGMDHPLLMGMJAANFHDLGEINJHLJAJIGOEMIBNFADGPMIGMFOLLEAGIKDC; BIGipServerist-uiscgi-content-prod-443-pool=2315708170.47873.0000; uiscgi_prod=6969c54808a90dff5e353c9e37054afe:prod; BIGipServerist-uiscgi-app-prod-443-pool=1288029568.47873.0000"
-    mylist = urlFetch(url, cookie)
+    mylist = fetchBalance(url, cookie)
     print(mylist)
