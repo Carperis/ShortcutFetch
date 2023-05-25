@@ -43,12 +43,13 @@ def getSeat(course, semester):
         return json_response(msg=msg)
     return json_response(msg=msg, seat=seat)
 
-
+# The following code is for testing purpose
 @app.route('/input/<input>', methods=['GET', 'POST'])
 def getInput(input):
     input = input.replace("[space]", " ").replace("[dot]", ".").replace(
         "[slash]", "/").replace("[backslash]", "\\").replace("[question]", "?")
     return json_response(input=input)
+
 
 
 if __name__ == '__main__':
